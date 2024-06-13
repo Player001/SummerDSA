@@ -23,28 +23,56 @@ StackArrayList createStack(){
 }
 
 bool stack_push(StackArrayList *s, int elem){
-	bool r;
+	bool r = isFull(*s);
 	
-	if(isFull(*s)==1){
+	if(r == 1){
 		printf("Stack is Full");
 	} else {
 		s->data[s->top] = elem;
 		s->top++;
 	}
 	
-	r = isEmpty(*s);
-	
 	return r;
 }
 
 bool stack_pop(StackArrayList *s){
-	bool r;
+	bool r = isEmpty(*s);
 	
-	if(isEmpty(*s)==1){
+	if(r == 1){
 		printf("Stack is Empty");
 	} else {
+		printf("%d",s->data[s->top]);
 		s->	top--;
 	}
 	
 	return r;
+}
+
+int stack_peek(StackArrayList s){
+	return s.data[s.top];
+}
+
+void display(StackArrayList s){
+	int val;
+	StackArrayList tmp = createStack();
+	
+	printf("\nStack from top to bottom:\n");
+	while(!isEmpty(s)){
+		val = stack_peek(s);
+		printf(" %d\n", val);
+		stack_pop(&s);
+		stack_push(&tmp, val);
+	}
+	
+	while(!isEmpty(tmp)){
+		stack_push(&s, stack_peek(tmp));
+		stack_pop(&tmp);
+	}
+}
+
+void visualize(StackArrayList s){
+	int ndx;
+
+	printf("\nVisualizing Stack from top to bottom:\n");
+	
 }
