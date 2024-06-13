@@ -220,5 +220,5 @@ void insertIndex(classRecord *list){
 }
 
 void insertSorted(classRecord *list){
-
+    
 }

@@ -1,15 +1,13 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdbool.h>
 #include "StackArray.h"
 
 bool isEmpty(StackArrayList s){
-	return s.top == -1 ? true : false;
+	return s.top == 0 ? true : false;
 }
 
 bool isFull(StackArrayList s){
-	
-	return s.top == MAX-1 ? true : false;
+	return s.top == MAX ? true : false;
 }
 
 void initStack(StackArrayList *s){
@@ -29,6 +27,7 @@ bool stack_push(StackArrayList *s, int elem){
 		printf("Stack is Full");
 	} else {
 		s->data[s->top] = elem;
+		// printf("pushed %d\n", elem);
 		s->top++;
 	}
 	
@@ -38,18 +37,24 @@ bool stack_push(StackArrayList *s, int elem){
 bool stack_pop(StackArrayList *s){
 	bool r = isEmpty(*s);
 	
-	if(r == 1){
-		printf("Stack is Empty");
-	} else {
-		printf("%d",s->data[s->top]);
-		s->	top--;
-	}
+		if(r == 1){
+			printf("Stack is Empty");
+		} else {
+			// printf("popped %d\n",s->data[s->top-1]);
+			s->	top--;
+		}
 	
 	return r;
 }
 
 int stack_peek(StackArrayList s){
-	return s.data[s.top];
+	int val = -1;
+    if (!isEmpty(s)) {
+        val = s.data[s.top - 1];
+    } else {
+        printf("Stack is Empty\n");
+    }
+    return val;
 }
 
 void display(StackArrayList s){
@@ -74,5 +79,7 @@ void visualize(StackArrayList s){
 	int ndx;
 
 	printf("\nVisualizing Stack from top to bottom:\n");
-	
+	for(ndx = s.top ; ndx > 0 ; ndx--){
+		printf("Index: %d Value: %d\n", ndx-1, s.data[ndx-1]);
+	}
 }
