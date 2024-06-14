@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include <string.h>
 // #include<string.h>
 
 /*1. Insert
@@ -47,18 +48,21 @@ studentInfo createStudent(studentInfo*);
 /*Inserst Functions*/
 void insertFirst(classRecord*);
 void insertLast(classRecord*);
-void insertIndex(classRecord*);
+void insertIndex(classRecord*, studentInfo ,int);
 void insertSorted(classRecord*);
 
 /*Delete Functions*/
-void deleteFront();
-void deleteLast();
-void deleteIndex();
+void deleteFront(classRecord*);
+void deleteLast(classRecord*);
+void deleteIndex(classRecord*, int);
 
 int main(){
     classRecord list = {.studCount = 0};
+    studentInfo student;
     int selection=-1;
+    int c;
 
+    student.age = -1;
     while(selection != 0){
         
         opt();
@@ -68,24 +72,45 @@ int main(){
             printList(list);
         }
         else if (selection == 2) {
+            printf("\nInserting First");
             insertFirst(&list);
         }
         else if (selection == 3) {
+            printf("\nInserting Last");
             insertLast(&list);
         } 
         else if (selection == 4) {
-            insertIndex(&list);
+            printf("\nPlease enter which index to insert to[0-19]: ");
+            scanf(" %d", &c);
+            insertIndex(&list, student,c);
         }
         else if (selection == 5) {
             printf("\nSorting List");
+            sortList(&list);
             insertSorted(&list);
         }
+        else if (selection == 6) {
+            printf("\nDeleting Front");
+            deleteFront(&list);
+        }
+        else if (selection == 7) {
+            printf("\nDeleting Last");
+            deleteLast(&list);
+        }
+        else if (selection == 8) {
+            printf("\nSelect index to delete [0-19]: ");
+            scanf(" %d", &c);
+            deleteIndex(&list, c);
+        }
+        else if (selection == 9) {
+            sortList(&list);
+        }
         else if(selection == 0){
-            printf("Goodbye.");
+            printf("\nGoodbye.");
             selection = 0;
         }
         else {
-            printf("Unkown Selection.");
+            printf("\nUnkown Selection.");
             selection = -1;
         }
     }
@@ -104,6 +129,7 @@ void opt(){
     printf("\n6 Delete Front");
     printf("\n7 Delete Last");
     printf("\n8 Delete Index");
+    printf("\n9 Sort List");
     printf("\n0 Quit");
     printf("\nSelect a function by inputting a number: ");
 }
@@ -151,7 +177,7 @@ studentInfo createStudent(studentInfo *student){
     printf("\nInput Last name: ");
     scanf(" %20[^\n]", student->Name.lname);
 
-    printf("\nInput Month of Birth: ");
+    printf("\nInput Month of Birth in numbers: ");
     scanf(" %d", &student->birthdate.month);
 
     printf("\nInput Year of Birth: ");
@@ -200,17 +226,15 @@ void insertLast(classRecord *list){
     }
 }
 
-void insertIndex(classRecord *list){
-    studentInfo student;
-    int c, ndx;
-
-    printf("\nPlease enter the index to insert at: ");
-    scanf(" %d", &c);
+void insertIndex(classRecord *list, studentInfo student, int c){
+    int ndx;
 
     if (c > list->studCount || c < 0){
         printf("\nInvalid index");
     } else {
-        student = createStudent(&student);
+        if(student.age == -1){
+            student = createStudent(&student);
+        }
         for(ndx = list->studCount ; ndx > c; ndx--){
             list->studList[ndx] = list->studList[ndx-1];
         }
@@ -223,8 +247,49 @@ void insertSorted(classRecord *list){
     studentInfo student;
     int ndx;
 
-    student = createStudent(&student);
-    for (ndx = list->studCount-1; student.age >= list->studList[ndx].age && student.age <= list->studList[ndx-1].age; ndx--) {
-    
+    if(list->studCount >= 20){
+        printf("List is Full!");
+    } else {
+        student = createStudent(&student);
+        for (ndx = 0; ndx < list->studCount && list->studList[ndx].age <= student.age; ndx++) {}
+        insertIndex(&(*list), student, ndx);
+    }
+}
+
+void deleteFront(classRecord *list){
+    int ndx;
+
+    if(list->studCount == 0){
+        printf("List is Empty!");
+    } else {
+        for(ndx = 0 ; ndx < list->studCount ; ndx++){
+            list->studList[ndx] = list->studList[ndx+1];
+        }
+        list->studCount--;
+    }
+}
+
+void deleteLast(classRecord *list){
+    if(list->studCount == 0){
+        printf("List is Empty!");
+    }
+    else {
+        list->studCount--;
+    }
+}
+
+void deleteIndex(classRecord *list, int elem){
+    int ndx;
+
+    if(list->studCount == 0){
+        printf("List is Empty!");
+    }
+    else if (elem > list->studCount || elem < 0) {
+        printf("That index is out of bounds");
+    } else {
+        for(ndx = elem ; ndx < list->studCount ; ndx++){
+            list->studList[ndx] = list->studList[ndx+1];
+        }
+        list->studCount--;
     }
 }
