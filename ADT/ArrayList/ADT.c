@@ -220,5 +220,11 @@ void insertIndex(classRecord *list){
 }
 
 void insertSorted(classRecord *list){
+    studentInfo student;
+    int ndx;
+
+    student = createStudent(&student);
+    for (ndx = list->studCount-1; student.age >= list->studList[ndx].age && student.age <= list->studList[ndx-1].age; ndx--) {
     
+    }
 }
