@@ -1,6 +1,4 @@
 #include<stdio.h>
-#include <string.h>
-// #include<string.h>
 
 /*1. Insert
     -Insert Front/First
