@@ -19,7 +19,14 @@ int main(int argc, char *argv[]) {
 	stack_pop(&list);
 	stack_push(&list, 5);
 
+	stack_pop(&list);
+	stack_pop(&list);
+	stack_pop(&list);
+	stack_pop(&list);
+
+	display(list);
 	visualize(list);
+
 
 	return 0;
 }

@@ -8,7 +8,7 @@ bool isEmpty(StackLinkedList s){
 }
 
 void initStack(StackLinkedList *s){
-    s->top =NULL;
+    s->top = NULL;
 }
 
 StackLinkedList createStack(){
