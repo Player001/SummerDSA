@@ -89,7 +89,8 @@ void display(Queue q){
         printf("Queue is empty!\n");
     } else {
         for(ndx = q.front ; isEmpty(q) != true ; dequeue(&q)){
-            printf("%d\n", front(q));
+            printf("%d -> ", front(q));
         }
+        printf("END\n\n");
     }
 }
