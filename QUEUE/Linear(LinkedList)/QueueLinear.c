@@ -8,15 +8,15 @@ void initQueue(Queue *q){
     q->rear = NULL;
 }
 
-bool isEmpty(Queue *q){
-    return (q->front == NULL) ? true : false;
+bool isEmpty(Queue q){
+    return (q.front == NULL) ? true : false;
 }
 
 bool enqueue(Queue *q, int elem){
     bool r = false;
     NodePtr tmp = malloc(sizeof(Node));
 
-    if(isEmpty(q)){
+    if(isEmpty(*q)){
         tmp->data = elem;
         tmp->next = NULL;
         q->front = tmp; 
@@ -34,7 +34,7 @@ bool dequeue(Queue *q){
     bool r = false;
     NodePtr tmp;
 
-    if(isEmpty(q)){
+    if(isEmpty(*q)){
         printf("\nQueue is empty!");
     } else {
         tmp = q->front;
@@ -44,6 +44,14 @@ bool dequeue(Queue *q){
     }
     
     return r;
+}
+
+int front(Queue q){
+    return q.front->data;
+}
+
+int rear(Queue q){
+    return q.rear->data;
 }
 
 void display(Queue q){
