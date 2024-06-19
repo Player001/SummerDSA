@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
 	printf("Rear: %d\n", rear(q));
 	
 	
-	printf("\n%d", isEmpty(q));
+	printf("%d\n", isEmpty(q));
 
 	return 0;
 }

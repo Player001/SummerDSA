@@ -84,11 +84,10 @@ int rear(Queue q){
 }
 
 void display(Queue q){
-    int ndx;
     if(isEmpty(q)){
         printf("Queue is empty!\n");
     } else {
-        for(ndx = q.front ; isEmpty(q) != true ; dequeue(&q)){
+        for(; isEmpty(q) != true ; dequeue(&q)){
             printf("%d -> ", front(q));
         }
         printf("END\n\n");
