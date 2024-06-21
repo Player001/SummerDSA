@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
 	sizeC = getUnion(A, B, &C, sizeA, sizeB);
 	sizeD = getIntersection(A, B, &D, sizeA, sizeB);
 
+	printf("%d\n", sizeA);
 	displayUnion(&C, sizeC);
 
 	free(C);

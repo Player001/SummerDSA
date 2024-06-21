@@ -60,8 +60,10 @@ SET getIntersection(SET A[], SET B[], INTERSECTION *C, int sizeA, int sizeB){
 // Display
 void displayUnion(SET A[], int size){
     int ndx;
+    int sizeA = sizeof(A)/sizeof(A[0]);
 
-    for(ndx = 0 ; ndx < size ; ndx++){
-        printf("%d -> ", A[ndx]);
-    }
+    printf("%d\n", sizeA);
+    // for(ndx = 0 ; ndx < size ; ndx++){
+    //     printf("%d -> ", A[ndx]);
+    // }
 }
