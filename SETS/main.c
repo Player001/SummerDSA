@@ -2,28 +2,46 @@
 #include <stdlib.h>
 #include "sets.h"
 
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
-/*Create a Program to find the Union and Intersection
-	- 2 functions that accepts 2 sets and find Union & Intersection
-	- Functions to add or delete values in the set
-	- Keep the integrity of the 2 initial sets when finding the Union and Intersection
-	- Display resulting Union and Intersection
-	- Array Implementation*/
 int main(int argc, char *argv[]) {
-	SET A[]={1,2,3,4,5};
-	SET B[]={4,5,6,7,8};
-	int sizeA = sizeof(A)/sizeof(A[0]);
-	int sizeB = sizeof(B)/sizeof(B[0]);
+	SET *A = (SET*)malloc(sizeof(SET));
+	SET *B = (SET*)malloc(sizeof(SET));
+	int sizeA = 0;
+	int sizeB = 0;
 	UNION C;
 	INTERSECTION D;
 	int sizeC, sizeD;
 
+	insertElem(&A, &sizeA, 1);
+	insertElem(&A, &sizeA, 2);
+	insertElem(&A, &sizeA, 3);
+	insertElem(&A, &sizeA, 4);
+	insertElem(&A, &sizeA, 5);
+	
+	insertElem(&B, &sizeB, 4);
+	insertElem(&B, &sizeB, 5);
+	insertElem(&B, &sizeB, 6);
+	insertElem(&B, &sizeB, 7);
+	insertElem(&B, &sizeB, 8);
+
 	sizeC = getUnion(A, B, &C, sizeA, sizeB);
 	sizeD = getIntersection(A, B, &D, sizeA, sizeB);
 
-	printf("%d\n", sizeA);
-	displayUnion(&C, sizeC);
+	displayUnion(C, sizeC);
+	displayIntersection(D, sizeD);	
 
+	deleteElem(&A, &sizeA, 4);
+	deleteElem(&A, &sizeA, 5);
+	insertElem(&A, &sizeA, 9);
+	insertElem(&A, &sizeA, 9);	
+
+	sizeC = getUnion(A, B, &C, sizeA, sizeB);
+	sizeD = getIntersection(A, B, &D, sizeA, sizeB);
+
+	displayUnion(C, sizeC);
+	displayIntersection(D, sizeD);	
+
+	free(A);
+	free(B);
 	free(C);
 	free(D);
 

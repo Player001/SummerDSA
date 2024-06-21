@@ -7,33 +7,25 @@ bool existsInSet(int elem, SET A[], int size){
     int ndx;
     bool r = false;
 
-    for(ndx = 0 ; ndx < size ; ndx++){
-        if(A[ndx] == elem){
-            r = true;
-        }
+    for(ndx = 0 ; ndx < size && A[ndx] != elem; ndx++){}
+    if(ndx > size && A[ndx] == elem){
+        r = true;
     }
 
     return r;
 }
 
-// Find and Create Union & Intersection
 SET getUnion(SET A[], SET B[], UNION *C, int sizeA, int sizeB){
     int ndx;
     int sizeC = 0;
-    *C = (int*)malloc((sizeA + sizeB) * sizeof(int));
+    *C = (int*)malloc((size_t)(sizeA + sizeB) * sizeof(int));
 
-    // Add elements from A to C
     for(ndx = 0 ; ndx < sizeA ; ndx++){
-        if(!existsInSet(A[ndx], *C, sizeC)){
-            (*C)[sizeC++] = A[ndx];
-        }
+        insertElem(C, &sizeC, A[ndx]);
     }
 
-    // Add elements from B to C
     for(ndx = 0 ; ndx < sizeB ; ndx++){
-        if(!existsInSet(B[ndx], *C, sizeC)){
-            (*C)[sizeC++] = B[ndx];
-        }
+        insertElem(C, &sizeC, B[ndx]);
     }
 
     return sizeC;
@@ -42,28 +34,52 @@ SET getUnion(SET A[], SET B[], UNION *C, int sizeA, int sizeB){
 SET getIntersection(SET A[], SET B[], INTERSECTION *C, int sizeA, int sizeB){
     int ndx;
     int sizeC = 0;
-    *C = (int*)malloc((sizeA + sizeB) * sizeof(int));
+    *C = (int*)malloc((size_t)(sizeA + sizeB) * sizeof(int));
 
     for(ndx = 0 ; ndx < sizeA ; ndx++){
-        // if elem in A exists in B
         if(existsInSet(A[ndx], B, sizeB)){
-            // if it does not exist in C
-            if(!existsInSet(A[ndx], *C, sizeC)){
-                (*C)[sizeC++] = A[ndx];
-            }
+            insertElem(C, &sizeC, A[ndx]);
         }
     }
 
     return sizeC;
 }
 
-// Display
+void insertElem(SET **A, int *size, int elem){
+    if(!existsInSet(elem, *A, *size)){
+        *A = (SET*)realloc(*A, (size_t)(*size + 1) * sizeof(SET));
+        (*A)[*size] = elem;
+        (*size)++;
+    }
+}
+void deleteElem(SET **A, int *size, int elem){
+    int ndx, jdx;
+    
+    for(ndx = 0 ; ndx < *size && (*A)[ndx] != elem ; ndx++){}
+
+    if(ndx < *size) {
+        for(jdx = ndx ; ndx < *size - 1 ; ndx++){
+            (*A)[jdx] = (*A)[jdx + 1];
+        }
+        *A = (SET*)realloc(*A, (size_t)(*size - 1) * sizeof(SET));
+        (*size)--;
+    }
+}
+
 void displayUnion(SET A[], int size){
     int ndx;
-    int sizeA = sizeof(A)/sizeof(A[0]);
 
-    printf("%d\n", sizeA);
-    // for(ndx = 0 ; ndx < size ; ndx++){
-    //     printf("%d -> ", A[ndx]);
-    // }
+    printf("\nUnion Set: |");
+    for(ndx = 0 ; ndx < size ; ndx++){
+        printf("%d|", A[ndx]);
+    }
+}
+
+void displayIntersection(SET A[], int size){
+    int ndx;
+
+    printf("\nIntersection Set: |");
+    for(ndx = 0 ; ndx < size ; ndx++){
+        printf("%d|", A[ndx]);
+    }
 }
