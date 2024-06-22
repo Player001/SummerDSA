@@ -28,11 +28,12 @@ int main(int argc, char *argv[]) {
 
 	displayUnion(C, sizeC);
 	displayIntersection(D, sizeD);	
+	printf("\n");
 
 	deleteElem(&A, &sizeA, 4);
 	deleteElem(&A, &sizeA, 5);
 	insertElem(&A, &sizeA, 9);
-	insertElem(&A, &sizeA, 9);	
+	insertElem(&B, &sizeB, 9);	
 
 	sizeC = getUnion(A, B, &C, sizeA, sizeB);
 	sizeD = getIntersection(A, B, &D, sizeA, sizeB);

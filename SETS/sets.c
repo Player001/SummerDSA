@@ -8,7 +8,7 @@ bool existsInSet(int elem, SET A[], int size){
     bool r = false;
 
     for(ndx = 0 ; ndx < size && A[ndx] != elem; ndx++){}
-    if(ndx > size && A[ndx] == elem){
+    if(A[ndx] == elem){
         r = true;
     }
 
