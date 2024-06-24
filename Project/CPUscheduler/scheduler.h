@@ -9,7 +9,7 @@ typedef struct {
     int arrival_time;
     int execution_time;
     int waiting_time;
-    int total_time;
+    int turnaround_time;
 } Process;
 
 typedef struct {
@@ -18,7 +18,11 @@ typedef struct {
 } ProcessList;
 
 void initProcess(ProcessList *P);
+void calculateProcess(ProcessList *P);
 void addProcess(ProcessList *P);
+
+void sortFCFS(ProcessList *P);
+void sortSJF(ProcessList *P);
 
 void display(ProcessList P);
 

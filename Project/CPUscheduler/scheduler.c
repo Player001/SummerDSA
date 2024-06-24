@@ -6,6 +6,10 @@ void initProcess(ProcessList *P){
     P->count = 0;
 }
 
+void calculateProcess(ProcessList *P){
+    printf("hi");
+}
+
 void addProcess(ProcessList *P){
     size_t len;
 
@@ -23,25 +27,31 @@ void addProcess(ProcessList *P){
         }
 
         // burst and arrival time
-        printf("Enter the burst time: ");
+        printf("\nEnter the burst time: ");
         scanf(" %d",&P->list[P->count].burst_time);
 
         printf("\nEnter the arrival time: ");
         scanf(" %d",&P->list[P->count].arrival_time);
 
+
+
         //increase count
         P->count++;
     } else {
-        printf("Process is Full");
+        printf("\nProcess is Full");
     }
 }
+
+void
 
 void display(ProcessList P){
     int ndx;
 
-    printf("%12s |%11s | %12s |%15s |%13s | %15s\n", "Process Name", "Burst Time", "Arrival Time", "Execution Time", "Waiting Time", "Turnaround Time");
+    printf("\n%12s |%11s | %12s |%15s |%13s | %15s\n", "Process Name", "Burst Time", "Arrival Time", "Execution Time", "Waiting Time", "Turnaround Time");
     
     for(ndx = 0; P.count != 0 && ndx < P.count ; ndx++){
-        printf("%12s |%11d | %12d |", P.list[ndx].process_name, P.list[ndx].burst_time, P.list[ndx].arrival_time);
+        printf("%12s |", P.list[ndx].process_name);
+        printf("%11d |", P.list[ndx].burst_time);
+        printf(" %12d |", P.list[ndx].arrival_time);
     }
 }
