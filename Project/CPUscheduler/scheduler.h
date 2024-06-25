@@ -18,8 +18,10 @@ typedef struct {
 } ProcessList;
 
 void initProcess(ProcessList *P);
-void calculateProcess(ProcessList *P);
 void addProcess(ProcessList *P);
+int getExecution(int t);
+int getWaiting(int t);
+
 
 void sortFCFS(ProcessList *P);
 void sortSJF(ProcessList *P);

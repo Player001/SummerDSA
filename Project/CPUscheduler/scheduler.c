@@ -7,7 +7,7 @@ void initProcess(ProcessList *P){
 }
 
 void calculateProcess(ProcessList *P){
-    printf("hi");
+    
 }
 
 void addProcess(ProcessList *P){
@@ -42,7 +42,25 @@ void addProcess(ProcessList *P){
     }
 }
 
-void
+void sortFCFS(ProcessList *P) {
+    Process tmp;
+    int ndx, jdx;
+
+    if(P == NULL) {
+        printf("\nEmpty Process List");
+    } else {
+        for(ndx = 0; ndx < P->count - 1; ndx++) {
+            for(jdx = 0; jdx < P->count - ndx - 1; jdx++) {
+                if(P->list[jdx].arrival_time > P->list[jdx + 1].arrival_time) {
+                    // Swap the processes
+                    tmp = P->list[jdx];
+                    P->list[jdx] = P->list[jdx + 1];
+                    P->list[jdx + 1] = tmp;
+                }
+            }
+        }
+    }
+}
 
 void display(ProcessList P){
     int ndx;
