@@ -17,15 +17,23 @@ typedef struct {
     int count;
 } ProcessList;
 
+// Utility functions
+void menu(int val, ProcessList *P);
+void menuopt();
 void initProcess(ProcessList *P);
-void addProcess(ProcessList *P);
-int getExecution(int t);
-int getWaiting(int t);
+void display(ProcessList P);
 
+void addProcess(ProcessList *P);
+void calculate(ProcessList *P);
+void getExecution(ProcessList *P);
+void getWaiting(ProcessList *P);
+void getTurnaround(ProcessList *P);
+
+int totalWaiting(ProcessList P);
+double averageWaiting(ProcessList P);
+int totalTurnaround(ProcessList P);
+double averageTurnaround(ProcessList P);
 
 void sortFCFS(ProcessList *P);
-void sortSJF(ProcessList *P);
-
-void display(ProcessList P);
 
 #endif
