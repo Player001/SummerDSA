@@ -22,30 +22,32 @@ typedef struct {
     char City[20];
 } Address;
 
-typedef struct {
+typedef struct node {
     Cname name;
     Address address;
+    struct node *next;
 } Info, *InfoPtr;
 
 typedef struct {
-    InfoPtr list[6];
+    InfoPtr *list;
     int count;
+    int size;
 } Hash_List;
 
-// hash functions
+// Hash Functions
 int getKey(char *data);
 int hash(Info person, int size);
 
-// table functions
-void resizeArray(Hash_List H, int *size);
-void insertSorted(Hash_List H, Info person);
-void addPerson(Hash_List H, Info person);
-void deletePerson(Hash_List H, Info person);
+// Table Functions
+void insertSorted(InfoPtr *list, InfoPtr newPerson);
+void resizeArray(Hash_List *H);
+void insertInfo(Hash_List *H, Info person);
+void deleteInfo(Hash_List *H, Info person);
 
-// utility functions
-bool checkTreshold(Hash_List H, int size); // check if # of elem >= 65% the size of the array
-void initHash(Hash_List H); //set the count to 0
-void printInfo(Info person); //prints the Info of a person
-void display(Hash_List H); //prints the entire hash table
+// Utility Functions
+bool checkThreshold(Hash_List H);
+void initTable(Hash_List *H, int size);
+void printInfo(InfoPtr person);
+void display(Hash_List H);
 
 #endif
