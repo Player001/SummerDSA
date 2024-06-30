@@ -5,14 +5,18 @@
 #include <string.h>
 
 // Hash Functions
-int getKey(char data[]) {
-    return (int)strlen(data);
+unsigned int hashString(const char *string) {
+    unsigned int hash = 0;
+    while (*string) {
+        hash = (hash * 31) + (unsigned char)*string++;
+    }
+    return hash;
 }
 
 int hash(Info person, int size) {
-    int key1 = getKey(person.name.Fname);
-    int key2 = getKey(person.address.City);
-    return (key1 + key2) % size;
+    unsigned int key1 = hashString(person.name.Fname);
+    unsigned int key2 = hashString(person.address.City);
+    return (int)(key1 + key2) % size;
 }
 
 // Utility Functions

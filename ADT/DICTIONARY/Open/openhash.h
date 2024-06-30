@@ -35,7 +35,7 @@ typedef struct {
 } Hash_List;
 
 // Hash Functions
-int getKey(char *data);
+unsigned int hashString(const char *string);
 int hash(Info person, int size);
 
 // Table Functions
