@@ -3,8 +3,6 @@
 
 #include <stdbool.h>
 
-#define DELETED_NODE ((Info*) -1)
-
 typedef struct{ 
  char Fname[20];
  char Lname[20];
@@ -25,20 +23,20 @@ typedef struct {
 typedef struct {
     Info *list;
     int count;
-    int size;
+    int table_size;
 } Hash_List;
 
-void initTable(Hash_List *H, int size);
+void initialize(Hash_List *H, int size);
+bool checkThreshold(Hash_List H); //load factor: 65%
 unsigned int hashString(const char *data);
-int hash(Info person, int size);
-int search(Hash_List*H, int key);
-void resizeArray(Hash_List *H);
+unsigned int hash(Info person, int increment, int table_size);
+void resize(Hash_List *H);// if checkThreshold is true then resize
 
-bool checkThreshold(Hash_List H); //65%
+unsigned int search(Hash_List H, Info target); //will return the index / key to get the Info
+void insertInfo(Hash_List *H, Info newPerson); //will insert info
+void deleteInfo(Hash_List *H, Info target); //will use search to delete info
+void findPerson(Hash_List H, Info person); //finds the person and prints
+
 void printInfo(Info person);
 void display(Hash_List H);
-
-void insertInfo(Hash_List *H, Info newPerson);
-void deleteInfo(Hash_List *H, Info target);
-
 #endif
