@@ -11,6 +11,7 @@
 */
 	
 int main(int argc, char *argv[]) {
+	AdjList list;
 	int graph[MAX][MAX];
 	int ver = 5;
 	
@@ -26,6 +27,11 @@ int main(int argc, char *argv[]) {
 	addEdge(graph, 3, 4);
 	
 	printGraph(graph, ver);
+	
+	initList(&list, ver);
+	createList(graph, &list);
+	printf("test exit createList");
+	printList(list);
 	
 	return 0;
 }
