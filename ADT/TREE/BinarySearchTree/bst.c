@@ -118,7 +118,7 @@ void deleteProd(NodePtr *T, char *dProd)
     }
 
     else {
-
+        //node with one child or no child
         if ((*T)->left == NULL) {
             temp = *T;
             *T = (*T)->right;
@@ -130,7 +130,7 @@ void deleteProd(NodePtr *T, char *dProd)
             *T = (*T)->left;
             free(temp);    
         }
-
+        //node with both child
         else {
             leftDepth = depth((*T)->left);
             rightDepth = depth((*T)->right);
